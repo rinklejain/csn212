@@ -2,15 +2,19 @@
 
 using namespace std;
 
-int distance [10010];     //assuming max number of nodes  = 1e5
-int INT_MAX = 1e9;
+//assuming max distance between any two = 1e9
+int max_dist = 1e9 + 10;
 
-void bellmanFord(edge[] ,int num_v ,int num_e , int source )
+void bellmanFord(int edge[][3] ,int num_v ,int num_e , int source )
 {
+	int distance [num_v];
 	for(int i = 0;i<num_v;i++)
 	{
-		distance[num_v] = INT_MAX;
+		distance[i] = max_dist
+;
 	}
+	distance[source] = 0;
+	cout <<"sourec"<<distance[source]<<endl;
 	for(int i = 0;i<num_v-1;i++)
 	{
 		for(int j=0;j<num_e;j++)
@@ -18,8 +22,9 @@ void bellmanFord(edge[] ,int num_v ,int num_e , int source )
 			int u = edge[j][0];
 			int v = edge[j][1];
 			int weight = edge[j][2];
-			if (distance[u] != INT_MAX && distance[u] + weight < distance[v])
+			if (distance[u] != max_dist && distance[u] + weight < distance[v])
                 distance[v] = distance[u] + weight;
+            cout <<distance[u]<<" "<<distance[v]<<" "<<weight<<endl;  
 		}
 	}
 
@@ -28,7 +33,7 @@ void bellmanFord(edge[] ,int num_v ,int num_e , int source )
 		int u = edge[j][0];
 		int v = edge[j][1];
 		int weight = edge[j][2];
-		if (distance[u] != INT_MAX && distance[u] + weight < distance[v])
+		if (distance[u] != max_dist && distance[u] + weight < distance[v])
         {
             cout<<"Graph contains negtive weight cycle";
             return;
@@ -38,10 +43,11 @@ void bellmanFord(edge[] ,int num_v ,int num_e , int source )
 	for(int i= 0 ;i<num_v;i++)
 	{
 		cout<<"Distance "<<source<<"->"<<i<<": ";
-		if(distance[i]==INT_MAX)
+		if(distance[i] == max_dist
+)
 			cout<<"Infinity"<<endl;
 		else
-			cout<<distance[num_v]<<endl;
+			cout<<distance[i]<<endl;
 	}
 
 }
@@ -49,17 +55,19 @@ void bellmanFord(edge[] ,int num_v ,int num_e , int source )
 int main ()
 {
 
+	clock_t tStart = clock();
 	int v , e;
-	cout <<"Enter number of edges and vertices";
+	cout <<"Enter number of vertices and edges: ";
 	cin>>v>>e;
 	int edge[e][3];
 	cout<<"Enter source , destination, weights of the "<<e<<" edges";
-	for(int i=0;i<n;i++)
+	for(int i=0;i<e;i++)
 	{
-		cin>>edge[i][0]>>edge[i][1]>>edge[1][0];
+		cin>>edge[i][0]>>edge[i][1]>>edge[i][2];
 	}
 	int source = 0;
 	bellmanFord(edge,v,e,source);
+	printf("Time taken: %.6fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
 }
 
