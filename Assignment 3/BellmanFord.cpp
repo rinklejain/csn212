@@ -10,11 +10,10 @@ void bellmanFord(int edge[][3] ,int num_v ,int num_e , int source )
 	int distance [num_v];
 	for(int i = 0;i<num_v;i++)
 	{
-		distance[i] = max_dist
-;
+		distance[i] = max_dist;
 	}
 	distance[source] = 0;
-	cout <<"sourec"<<distance[source]<<endl;
+	//cout <<"sourec"<<distance[source]<<endl;
 	for(int i = 0;i<num_v-1;i++)
 	{
 		for(int j=0;j<num_e;j++)
@@ -60,7 +59,7 @@ int main ()
 	cout <<"Enter number of vertices and edges: ";
 	cin>>v>>e;
 	int edge[e][3];
-	cout<<"Enter source , destination, weights of the "<<e<<" edges";
+	cout<<"Enter source , destination, weights of the "<<e<<" edges:";
 	for(int i=0;i<e;i++)
 	{
 		cin>>edge[i][0]>>edge[i][1]>>edge[i][2];
